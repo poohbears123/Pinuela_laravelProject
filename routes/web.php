@@ -3,16 +3,41 @@
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
+use App\Livewire\Settings\TwoFactor;
 use Illuminate\Support\Facades\Route;
+use Laravel\Fortify\Features;
+use App\Http\Controllers\StudentController; 
 
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/aboutus2', function () {
-    return 'this is about us page';
-})->name('about us');
 
-Route::get('/Homepg', function () {
-    return view('Homepg');
-})->name('about us');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard',[StudentController::class, 'index'])->name('dashboard');  
+    Route::get('/students',[StudentController::class, 'index'])->name('students.index');
+    Route::post('/students',[StudentController::class, 'store'])->name('students.store');
+    Route::put('/students/{student}', [StudentController::class, 'update'])->name('students.update');
+    Route::delete('/students/{student}', [StudentController::class, 'destroy'])->name('students.destroy');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::redirect('settings', 'settings/profile');
+
+    Route::get('settings/profile', Profile::class)->name('settings.profile');
+    Route::get('settings/password', Password::class)->name('settings.password');
+    Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
+
+    // Route::get('settings/two-factor', TwoFactor::class)
+    //     ->middleware(
+    //         when(
+    //             Features::canManageTwoFactorAuthentication()
+    //                 && Features::optionEnabled(Features::twoFactorAuthentication(), 'confirmPassword'),
+    //             ['password.confirm'],
+    //             [],
+    //         ),
+    //     )
+    //     ->name('two-factor.show');
+});
+
+require __DIR__.'/auth.php';
