@@ -18,8 +18,9 @@
             </div>
             <div class="mb-4">
                 <label for="editAddress" class="block text-sm font-medium text-gray-700">Address</label>
-                <input type="text" id="editAddress" name="address" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
+                <input type="text" id="editAddress" name="address" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
             </div>
+
             <div class="flex justify-end">
                 <button type="button" onclick="closeEditModal()" class="mr-2 px-4 py-2 bg-gray-300 rounded">Cancel</button>
                 <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Save</button>

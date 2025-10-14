@@ -14,7 +14,7 @@ class StudentController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:students,email' . ($studentId ? ',' . $studentId : ''),
             'phone' => 'required|string|max:15',
-            'birthdate' => 'required|date',
+            'address' => 'nullable|string|max:255',
         ];
     }
 
