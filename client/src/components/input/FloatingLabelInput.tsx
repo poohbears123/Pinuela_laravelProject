@@ -105,21 +105,20 @@ const FloatingLabelInput: FC<FloatingLabelInputProps> = ({
             <label
                 htmlFor={inputId}
                 className={`
-                    absolute left-2.5 text-sm
-                    ${hasError ? "text-red-500" : "text-gray-500"}
-                    bg-white px-1 transition-all duration-200
+        absolute left-2.5 z-10 origin-left
+        px-1 text-sm transition-all duration-200
+        
 
-                    top-4 scale-100
-                    peer-placeholder-shown:top-4
-                    peer-placeholder-shown:scale-100
+        ${hasError ? "text-red-500" : "text-gray-500"}
 
-                    peer-focus:top-1
-                    peer-focus:scale-75
-                    peer-focus:text-blue-600
+        top-1/2 -translate-y-1/2 scale-100
+        peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4
+        peer-focus:text-blue-600
 
-                    ${hasValue ? "top-1 scale-75" : ""}
-                    ${labelClassName}
-                `}
+        ${hasValue ? "top-2 scale-75 -translate-y-4" : ""}
+
+        ${labelClassName || ""}
+    `}
             >
                 {label}
                 {required && <span className="text-red-600 ml-1">*</span>}
