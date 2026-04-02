@@ -1,68 +1,84 @@
-import type { ReactNode, FC } from "react";
+import React from "react";
+import type { FC, ReactNode } from "react";
 
 /* ========= TYPES ========= */
 interface TableProps {
     children: ReactNode;
+    loading?: boolean;
+    emptyText?: string;
+    className?: string;
 }
 
 /* ========= TABLE ========= */
-const Table: FC<TableProps> = ({ children }) => {
+const Table: FC<TableProps> = ({ children, loading, emptyText, className = "" }) => {
+    const hasChildren = React.Children.count(children) > 0;
+
     return (
-        <div className="overflow-x-auto">
-            <table className="min-w-full border border-gray-300 text-sm text-left">
-                {children}
-            </table>
+        <div className={`overflow-x-auto rounded-lg border shadow-sm ${className}`}>
+            <div className="relative">
+                {loading && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-white/80 backdrop-blur-sm z-10 rounded-lg">
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                    </div>
+                )}
+                <table className="min-w-full divide-y divide-gray-200 text-sm">
+                    {hasChildren ? children : (
+                        <tbody className="bg-white">
+                            <tr>
+                                <td colSpan={100} className="px-6 py-12 text-center text-gray-500">
+                                    {emptyText || "No data available"}
+                                </td>
+                            </tr>
+                        </tbody>
+                    )}
+                </table>
+            </div>
         </div>
     );
 };
 
 /* ========= HEADER ========= */
-const TableHeader: FC<TableProps> = ({ children }) => {
-    return (
-        <thead className="bg-gray-100 text-gray-700 uppercase text-xs">
-            {children}
-        </thead>
-    );
-};
+const TableHeader: FC<TableProps> = ({ children, className = "" }) => (
+    <thead className={`bg-gray-50 text-gray-900 text-xs font-medium uppercase tracking-wider ${className}`}>
+        {children}
+    </thead>
+);
 
 /* ========= BODY ========= */
-const TableBody: FC<TableProps> = ({ children }) => {
-    return <tbody>{children}</tbody>;
-};
+const TableBody: FC<TableProps> = ({ children, className = "" }) => (
+    <tbody className={`bg-white divide-y divide-gray-200 ${className}`}>
+        {children}
+    </tbody>
+);
 
 /* ========= ROW ========= */
-const TableRow: FC<TableProps> = ({ children }) => {
-    return (
-        <tr className="border-b hover:bg-gray-50 transition">
-            {children}
-        </tr>
-    );
-};
+const TableRow: FC<TableProps> = ({ children, className = "" }) => (
+    <tr className={`hover:bg-gray-50 transition-colors ${className}`}>
+        {children}
+    </tr>
+);
 
-/* ========= HEADER CELL (th) ========= */
-const TableHeadCell: FC<TableProps> = ({ children }) => {
-    return (
-        <th className="px-4 py-3 font-semibold border">
-            {children}
-        </th>
-    );
-};
+/* ========= HEAD CELL ========= */
+const TableHeadCell: FC<TableProps> = ({ children, className = "" }) => (
+    <th className={`px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ${className}`}>
+        {children}
+    </th>
+);
 
-/* ========= CELL (td) ========= */
-const TableCell: FC<TableProps> = ({ children }) => {
-    return (
-        <td className="px-4 py-2 border">
-            {children}
-        </td>
-    );
-};
+/* ========= CELL ========= */
+const TableCell: FC<TableProps> = ({ children, className = "" }) => (
+    <td className={`px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 ${className}`}>
+        {children}
+    </td>
+);
 
-/* ========= EXPORT ========= */
-export {
-    Table,
-    TableHeader,
-    TableBody,
-    TableRow,
-    TableHeadCell,
-    TableCell,
-};
+/* ========= EXPORTS ========= */
+export { Table, TableHeader, TableBody, TableRow, TableHeadCell, TableCell };
+
+// Sample data for demos
+export const sampleUsersData = [
+    { id: 1, name: "John Doe", email: "john@example.com", role: "Admin", status: "Active" },
+    { id: 2, name: "Jane Smith", email: "jane@example.com", role: "User", status: "Inactive" },
+    { id: 3, name: "Bob Johnson", email: "bob@example.com", role: "Moderator", status: "Active" },
+];
+
