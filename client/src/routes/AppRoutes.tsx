@@ -4,22 +4,25 @@ import AppLayout from "../layout/AppLayout"
 import FloatingLabelInput from "../components/input/FloatingLabelInput"
 
 const SampleComponent = () => {
-    const [firstName, setFirstName] = useState("");
+    const [firstName, setFirstName] = useState("john");
     const [lastName, setLastName] = useState("");
     const [birthDate, setBirthDate] = useState("");
     const [password, setPassword] = useState("");
 
     return (
         <>
-            <h1 className="text-red-500 bg-amber-300 mb-8 text-2xl font-bold">Floating Label Input Demo</h1>
-            <div className="space-y-6 max-w-md mx-auto p-6 bg-white rounded-xl shadow-lg">
+            <h1 className="text-red-500 mb-4">Floating Label Input Demo</h1>
+            <div className="mb-4 space-y-4">
                 <FloatingLabelInput
                     label="First Name"
                     type="text"
                     name="first_name"
+                    required
+                    autoFocus
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
                 />
+                <p className="font-medium">First Name:{firstName}</p>
 
                 <FloatingLabelInput
                     label="Last Name"
@@ -28,6 +31,7 @@ const SampleComponent = () => {
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
                 />
+                <p className="font-medium">Last Name:{lastName}</p>
 
                 <FloatingLabelInput
                     label="Birth Date"
@@ -36,6 +40,7 @@ const SampleComponent = () => {
                     value={birthDate}
                     onChange={(e) => setBirthDate(e.target.value)}
                 />
+                <p className="font-medium">BirthDate:{birthDate}</p>
 
                 <FloatingLabelInput
                     label="Password"
@@ -46,6 +51,7 @@ const SampleComponent = () => {
                     showPasswordToggle={true}
                     error={password.length > 0 && password.length < 6 ? "Password must be at least 6 characters" : ""}
                 />
+                <p className="font-medium">Password:{password}</p>
             </div>
         </>
     )
