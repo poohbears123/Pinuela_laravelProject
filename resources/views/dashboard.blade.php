@@ -66,8 +66,8 @@
                             <input type="tel" name="phone" placeholder="Enter phone number" class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100" required>
                         </div>
                         <div>
-                            <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Birthdate</label>
-                            <input type="date" name="birthdate" class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100" required>
+                            <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Address</label>
+                            <input type="text" name="address" placeholder="Enter address" class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100">
                         </div>
                         <div class="md:col-span-2">
                             <button type="submit" class="rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20">
@@ -88,7 +88,7 @@
                                     <th class="px-4 py-3 text-left text-sm font-semibold text-neutral-700 dark:text-neutral-300">Name</th>
                                     <th class="px-4 py-3 text-left text-sm font-semibold text-neutral-700 dark:text-neutral-300">Email</th>
                                     <th class="px-4 py-3 text-left text-sm font-semibold text-neutral-700 dark:text-neutral-300">Phone</th>
-                                    <th class="px-4 py-3 text-left text-sm font-semibold text-neutral-700 dark:text-neutral-300">Address</th>
+
                                     <th class="px-4 py-3 text-left text-sm font-semibold text-neutral-700 dark:text-neutral-300">Actions</th>
                                 </tr>
                             </thead>
@@ -99,7 +99,6 @@
                                     <td class="px-4 py-3 text-sm text-neutral-900 dark:text-neutral-100">{{ $student->name }}</td>
                                     <td class="px-4 py-3 text-sm text-neutral-600 dark:text-neutral-400">{{ $student->email }}</td>
                                     <td class="px-4 py-3 text-sm text-neutral-600 dark:text-neutral-400">{{ $student->phone }}</td>
-                                    <td class="px-4 py-3 text-sm text-neutral-600 dark:text-neutral-400">{{ $student->address }}</td>
                                     <td class="px-4 py-3 text-sm">
                                         <button onclick="openEditModal({{ $student->id }}, '{{ $student->name ?? '' }}', '{{ $student->email ?? '' }}', '{{ $student->phone ?? '' }}', '{{ $student->address ?? '' }}')" class="text-blue-600 transition-colors hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">Edit</button>
                                         <span class="mx-1 text-neutral-400">|</span>
